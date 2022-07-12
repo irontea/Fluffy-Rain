@@ -13,9 +13,11 @@
 		54D5AA68287DFD3D005F2F3D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54D5AA66287DFD3D005F2F3D /* Main.storyboard */; };
 		54D5AA6A287DFD3F005F2F3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54D5AA69287DFD3F005F2F3D /* Assets.xcassets */; };
 		54D5AA6D287DFD3F005F2F3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54D5AA6B287DFD3F005F2F3D /* LaunchScreen.storyboard */; };
+		856A4281A54FF784C1FCEDBC /* Pods_Fluffy_rain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DD3415480C8868CEA2E9E7 /* Pods_Fluffy_rain.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18B279172AA6BCBF04F90EF2 /* Pods-Fluffy-rain.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fluffy-rain.debug.xcconfig"; path = "Target Support Files/Pods-Fluffy-rain/Pods-Fluffy-rain.debug.xcconfig"; sourceTree = "<group>"; };
 		54D5AA5D287DFD3D005F2F3D /* Fluffy-rain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fluffy-rain.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D5AA60287DFD3D005F2F3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		54D5AA62287DFD3D005F2F3D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +26,8 @@
 		54D5AA69287DFD3F005F2F3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		54D5AA6C287DFD3F005F2F3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		54D5AA6E287DFD3F005F2F3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2DD3415480C8868CEA2E9E7 /* Pods_Fluffy_rain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fluffy_rain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B38507318E69861F8653104C /* Pods-Fluffy-rain.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fluffy-rain.release.xcconfig"; path = "Target Support Files/Pods-Fluffy-rain/Pods-Fluffy-rain.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +35,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				856A4281A54FF784C1FCEDBC /* Pods_Fluffy_rain.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08848EBB60DC3201F26D8ADA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				18B279172AA6BCBF04F90EF2 /* Pods-Fluffy-rain.debug.xcconfig */,
+				B38507318E69861F8653104C /* Pods-Fluffy-rain.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		54D5AA54287DFD3D005F2F3D = {
 			isa = PBXGroup;
 			children = (
 				54D5AA5F287DFD3D005F2F3D /* Fluffy-rain */,
 				54D5AA5E287DFD3D005F2F3D /* Products */,
+				08848EBB60DC3201F26D8ADA /* Pods */,
+				C7ECE70D57F7116A49317B61 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +84,14 @@
 			path = "Fluffy-rain";
 			sourceTree = "<group>";
 		};
+		C7ECE70D57F7116A49317B61 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B2DD3415480C8868CEA2E9E7 /* Pods_Fluffy_rain.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +99,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 54D5AA71287DFD3F005F2F3D /* Build configuration list for PBXNativeTarget "Fluffy-rain" */;
 			buildPhases = (
+				61FFC117C4E1419E9B048CC0 /* [CP] Check Pods Manifest.lock */,
 				54D5AA59287DFD3D005F2F3D /* Sources */,
 				54D5AA5A287DFD3D005F2F3D /* Frameworks */,
 				54D5AA5B287DFD3D005F2F3D /* Resources */,
+				AE92D7BB92E6DBD0F74D5E7A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,6 +159,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		61FFC117C4E1419E9B048CC0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Fluffy-rain-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AE92D7BB92E6DBD0F74D5E7A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Fluffy-rain/Pods-Fluffy-rain-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Fluffy-rain/Pods-Fluffy-rain-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Fluffy-rain/Pods-Fluffy-rain-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		54D5AA59287DFD3D005F2F3D /* Sources */ = {
@@ -282,6 +351,7 @@
 		};
 		54D5AA72287DFD3F005F2F3D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 18B279172AA6BCBF04F90EF2 /* Pods-Fluffy-rain.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -309,6 +379,7 @@
 		};
 		54D5AA73287DFD3F005F2F3D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B38507318E69861F8653104C /* Pods-Fluffy-rain.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
