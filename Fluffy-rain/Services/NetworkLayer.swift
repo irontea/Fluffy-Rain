@@ -6,3 +6,14 @@
 //
 
 import Foundation
+import Alamofire
+
+class NetworkLayer {
+    
+    static let shared = NetworkLayer()
+    
+    private init() {
+        
+    }
+}
+
