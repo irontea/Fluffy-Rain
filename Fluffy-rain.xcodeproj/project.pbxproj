@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5478B4F32889972600F486C6 /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5478B4F22889972500F486C6 /* NetworkLayer.swift */; };
+		5478B4F52889974000F486C6 /* WeatherStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5478B4F42889974000F486C6 /* WeatherStruct.swift */; };
 		54D5AA61287DFD3D005F2F3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D5AA60287DFD3D005F2F3D /* AppDelegate.swift */; };
 		54D5AA63287DFD3D005F2F3D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D5AA62287DFD3D005F2F3D /* SceneDelegate.swift */; };
 		54D5AA65287DFD3D005F2F3D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D5AA64287DFD3D005F2F3D /* ViewController.swift */; };
@@ -18,6 +20,8 @@
 
 /* Begin PBXFileReference section */
 		18B279172AA6BCBF04F90EF2 /* Pods-Fluffy-rain.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fluffy-rain.debug.xcconfig"; path = "Target Support Files/Pods-Fluffy-rain/Pods-Fluffy-rain.debug.xcconfig"; sourceTree = "<group>"; };
+		5478B4F22889972500F486C6 /* NetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
+		5478B4F42889974000F486C6 /* WeatherStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherStruct.swift; sourceTree = "<group>"; };
 		54D5AA5D287DFD3D005F2F3D /* Fluffy-rain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fluffy-rain.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D5AA60287DFD3D005F2F3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		54D5AA62287DFD3D005F2F3D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +55,22 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		5478B4F62889974600F486C6 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				5478B4F42889974000F486C6 /* WeatherStruct.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		5478B4F72889974E00F486C6 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5478B4F22889972500F486C6 /* NetworkLayer.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		54D5AA54287DFD3D005F2F3D = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +95,8 @@
 				54D5AA60287DFD3D005F2F3D /* AppDelegate.swift */,
 				54D5AA62287DFD3D005F2F3D /* SceneDelegate.swift */,
 				54D5AA64287DFD3D005F2F3D /* ViewController.swift */,
+				5478B4F72889974E00F486C6 /* Services */,
+				5478B4F62889974600F486C6 /* Entity */,
 				54D5AA66287DFD3D005F2F3D /* Main.storyboard */,
 				54D5AA69287DFD3F005F2F3D /* Assets.xcassets */,
 				54D5AA6B287DFD3F005F2F3D /* LaunchScreen.storyboard */,
@@ -206,8 +228,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5478B4F32889972600F486C6 /* NetworkLayer.swift in Sources */,
 				54D5AA65287DFD3D005F2F3D /* ViewController.swift in Sources */,
 				54D5AA61287DFD3D005F2F3D /* AppDelegate.swift in Sources */,
+				5478B4F52889974000F486C6 /* WeatherStruct.swift in Sources */,
 				54D5AA63287DFD3D005F2F3D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
