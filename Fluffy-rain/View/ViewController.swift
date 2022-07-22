@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        NetworkLayer.shared.getWeatherData()
+        NetworkLayer.shared.getWeatherData(for: "Moscow")
     }    
 }
 
