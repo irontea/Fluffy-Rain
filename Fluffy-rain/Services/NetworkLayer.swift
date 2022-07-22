@@ -22,7 +22,7 @@ class NetworkLayer {
             case .success(let data):
                 do {
                     let weatherData = try JSONDecoder().decode(WeatherStruct.self, from: data!)
-                    print(weatherData.currentConditions)
+                    
                 } catch let error {
                     print(String(describing: error))
                 }
