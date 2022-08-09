@@ -12,6 +12,7 @@ class MainViewController: UIViewController {
 
 //    private var viewModel: MainViewModelProtocol!
 
+    var viemodel: MainViewModelProtocol!
     
     var temperatureLabel: UILabel = {
        let tl = UILabel()
@@ -30,6 +31,9 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viemodel = MainViewModel()
+        
         tableViewForAnotherDays.dataSource = self
         tableViewForAnotherDays.delegate = self
         view.addSubview(temperatureLabel)
