@@ -17,8 +17,8 @@ protocol MainViewModelProtocol: AnyObject {
 class MainViewModel: MainViewModelProtocol {
     
     var city: String = ""
-    private var currentWeather: WeatherByDay?
-    private var weatherForNextDays: [WeatherByDay]?
+    private var weatherForCity: WeatherStruct?
+
     
 
     func fetchWeather() {
@@ -26,8 +26,7 @@ class MainViewModel: MainViewModelProtocol {
             guard let self = self else { return }
             switch result {
             case .success(let weatherData):
-                self.currentWeather = weatherData?.currentConditions
-                self.weatherForNextDays = weatherData?.days
+                self.weatherForCity = weatherData
             case .failure(let error):
                 print(error)
             }
@@ -35,11 +34,11 @@ class MainViewModel: MainViewModelProtocol {
     }
     
     func getDaysCount() -> Int {
-        return weatherForNextDays?.count ?? 0
+        return weatherForCity?.days.count ?? 0
     }
     
     func getCurrentTemperature() -> String {
-        guard let currentWeather = currentWeather else {return ""}
+        guard let currentWeather = weatherForCity?.currentConditions else {return ""}
         return String(describing: currentWeather.temp)
     }
 
