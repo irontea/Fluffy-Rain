@@ -11,13 +11,24 @@ import RxSwift
 
 protocol MainViewModelProtocol: AnyObject {
     var city: String {get set}
+    var weatherForNextDays: PublishRelay<[WeatherByDay]> {get set}
+    var currentWeather: PublishRelay<WeatherByDay> {get set}
+//    var selectedWeatherForNextDays:Observable<[WeatherByDay]> {get}
+    
     func fetchWeather()
 }
 
 class MainViewModel: MainViewModelProtocol {
     
-    var city: String = ""
-    private var weatherForCity: WeatherStruct?
+    
+    
+    var weatherForNextDays = PublishRelay<[WeatherByDay]>()
+    var currentWeather = PublishRelay<WeatherByDay>()
+//    var selectedWeatherForNextDays: Observable<[WeatherByDay]> {
+//        return weatherForNextDays.asObservable()
+//    }
+    var city: String = "moscow"
+
 
     
 
@@ -26,21 +37,13 @@ class MainViewModel: MainViewModelProtocol {
             guard let self = self else { return }
             switch result {
             case .success(let weatherData):
-                self.weatherForCity = weatherData
+                self.weatherForNextDays.accept(weatherData!.days)
+                self.currentWeather.accept(weatherData!.currentConditions)
             case .failure(let error):
                 print(error)
             }
         }
     }
     
-    func getDaysCount() -> Int {
-        return weatherForCity?.days.count ?? 0
-    }
-    
-    func getCurrentTemperature() -> String {
-        guard let currentWeather = weatherForCity?.currentConditions else {return ""}
-        return String(describing: currentWeather.temp)
-    }
-
     
 }

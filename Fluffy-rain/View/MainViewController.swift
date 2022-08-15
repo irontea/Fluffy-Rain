@@ -7,12 +7,15 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 class MainViewController: UIViewController {
 
 //    private var viewModel: MainViewModelProtocol!
 
-    var viemodel: MainViewModelProtocol!
+    private var viewmodel: MainViewModelProtocol!
+    private let disposeBag = DisposeBag()
     
     var temperatureLabel: UILabel = {
        let tl = UILabel()
@@ -25,17 +28,14 @@ class MainViewController: UIViewController {
     var tableViewForAnotherDays: UITableView = {
         let tv = UITableView()
         tv.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        
         return tv
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viemodel = MainViewModel()
-        
-        tableViewForAnotherDays.dataSource = self
-        tableViewForAnotherDays.delegate = self
+        viewmodel = MainViewModel()
+
         view.addSubview(temperatureLabel)
         view.addSubview(tableViewForAnotherDays)
         temperatureLabel.snp.makeConstraints { make in
@@ -49,20 +49,23 @@ class MainViewController: UIViewController {
             make.bottom.equalTo(view.snp.bottom)
         }
         
+        tableViewForAnotherDays.rx.setDelegate(self).disposed(by: disposeBag)
+        viewmodel.fetchWeather()
+        bindTableView()
+        
         // Do any additional setup after loading the view.
-    }    
-}
-
-extension MainViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = "Test"
-        return cell
+    private func bindTableView() {
+        viewmodel.weatherForNextDays.bind(to: tableViewForAnotherDays.rx.items(cellIdentifier: "Cell")) {
+            (tv, tableView, c) in
+            c.textLabel?.text = String(describing: tableView.temp)
+            
+        }.disposed(by: disposeBag)
     }
+}
+
+extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return UITableView.automaticDimension
