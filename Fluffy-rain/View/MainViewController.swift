@@ -58,8 +58,8 @@ class MainViewController: UIViewController {
     
     private func bindTableView() {
         viewmodel.weatherForNextDays.bind(to: tableViewForAnotherDays.rx.items(cellIdentifier: "Cell")) {
-            (tv, tableView, c) in
-            c.textLabel?.text = String(describing: tableView.temp)
+            (count, data, cell) in
+            cell.textLabel?.text = String(describing: data.temp)
             
         }.disposed(by: disposeBag)
     }

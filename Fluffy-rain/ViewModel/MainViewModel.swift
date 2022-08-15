@@ -37,8 +37,9 @@ class MainViewModel: MainViewModelProtocol {
             guard let self = self else { return }
             switch result {
             case .success(let weatherData):
-                self.weatherForNextDays.accept(weatherData!.days)
-                self.currentWeather.accept(weatherData!.currentConditions)
+                guard let weatherData = weatherData else {return}
+                self.weatherForNextDays.accept(weatherData.days)
+                self.currentWeather.accept(weatherData.currentConditions)
             case .failure(let error):
                 print(error)
             }
