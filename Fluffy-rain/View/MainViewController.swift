@@ -11,21 +11,30 @@ import RxSwift
 import RxCocoa
 
 class MainViewController: UIViewController {
-
-//    private var viewModel: MainViewModelProtocol!
-
+    
+    //    private var viewModel: MainViewModelProtocol!
+    
     private var viewmodel: MainViewModelProtocol!
     private let disposeBag = DisposeBag()
     
-    var temperatureLabel: UILabel = {
-       let tl = UILabel()
-        tl.text = "123"
-        tl.textColor = .black
-        tl.font = UIFont.systemFont(ofSize: 28, weight: .bold)
-        return tl
+    private var textFieldForCity: UITextField = {
+        let tf = UITextField()
+        tf.borderStyle = UITextField.BorderStyle.line
+        tf.textColor = .black
+        tf.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        return tf
     }()
     
-    var tableViewForAnotherDays: UITableView = {
+    private var acceptButton: UIButton = {
+        let bt = UIButton()
+        bt.backgroundColor = .red
+        bt.setTitle("Accept", for: .normal)
+//        bt.addTarget(MainViewController.self, action: #selector(accept), for: .touchUpInside)
+        return bt
+    }()
+    
+    
+    private var tableViewForAnotherDays: UITableView = {
         let tv = UITableView()
         tv.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         return tv
@@ -35,15 +44,22 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         viewmodel = MainViewModel()
-
-        view.addSubview(temperatureLabel)
+        
+        view.addSubview(textFieldForCity)
+        view.addSubview(acceptButton)
         view.addSubview(tableViewForAnotherDays)
-        temperatureLabel.snp.makeConstraints { make in
+        textFieldForCity.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(50)
-            make.centerX.equalToSuperview()
+            make.leading.equalToSuperview()
         }
+        
+        acceptButton.snp.makeConstraints{ make in
+            make.top.equalToSuperview().offset(50)
+            make.leading.equalTo(textFieldForCity.snp.trailing)
+        }
+        
         tableViewForAnotherDays.snp.makeConstraints { make in
-            make.top.equalTo(temperatureLabel.snp.bottom)
+            make.top.equalTo(textFieldForCity.snp.bottom)
             make.leading.equalTo(view.snp.leading)
             make.trailing.equalTo(view.snp.trailing)
             make.bottom.equalTo(view.snp.bottom)
@@ -52,16 +68,35 @@ class MainViewController: UIViewController {
         tableViewForAnotherDays.rx.setDelegate(self).disposed(by: disposeBag)
         viewmodel.fetchWeather()
         bindTableView()
-        
+        bindTextField()
+        bindAcceptButton()
         // Do any additional setup after loading the view.
     }
     
     private func bindTableView() {
-        viewmodel.weatherForNextDays.bind(to: tableViewForAnotherDays.rx.items(cellIdentifier: "Cell")) {
-            (count, data, cell) in
-            cell.textLabel?.text = String(describing: data.temp)
+        viewmodel.weatherForNextDays
+            .bind(to: tableViewForAnotherDays.rx.items(cellIdentifier: "Cell")) {
+                (count, data, cell) in
+                cell.textLabel?.text = String(describing: data.temp)
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindTextField() {
+        textFieldForCity.rx.text
+            .orEmpty
+            .bind(to: viewmodel.city)
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindAcceptButton() {
+        acceptButton.rx.tap
+            .bind { [weak self] in
+                guard let self = self else {return}
+                self.viewmodel.fetchWeather()
+            }
+            .disposed(by: disposeBag)
             
-        }.disposed(by: disposeBag)
     }
 }
 

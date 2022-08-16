@@ -10,30 +10,21 @@ import RxCocoa
 import RxSwift
 
 protocol MainViewModelProtocol: AnyObject {
-    var city: String {get set}
+    var city: BehaviorRelay<String?> {get set}
     var weatherForNextDays: PublishRelay<[WeatherByDay]> {get set}
     var currentWeather: PublishRelay<WeatherByDay> {get set}
-//    var selectedWeatherForNextDays:Observable<[WeatherByDay]> {get}
     
     func fetchWeather()
 }
 
 class MainViewModel: MainViewModelProtocol {
     
-    
-    
+    var city = BehaviorRelay<String?>(value: "Moscow")
     var weatherForNextDays = PublishRelay<[WeatherByDay]>()
     var currentWeather = PublishRelay<WeatherByDay>()
-//    var selectedWeatherForNextDays: Observable<[WeatherByDay]> {
-//        return weatherForNextDays.asObservable()
-//    }
-    var city: String = "moscow"
-
-
     
-
     func fetchWeather() {
-        NetworkLayer.shared.getWeatherData(for: city) { [weak self] result in
+        NetworkLayer.shared.getWeatherData(for: city.value ?? "Moscow") { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let weatherData):
@@ -45,6 +36,6 @@ class MainViewModel: MainViewModelProtocol {
             }
         }
     }
-    
+        
     
 }
