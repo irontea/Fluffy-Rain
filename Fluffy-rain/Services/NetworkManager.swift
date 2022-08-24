@@ -8,13 +8,13 @@
 import Foundation
 import Alamofire
 
-protocol NetworkLayerProtocol {
+protocol NetworkManagerProtocol {
     func getWeatherData(for city: String, completion: @escaping (Result<WeatherStruct?, Error>) -> ())
 }
 
-class NetworkLayer: NetworkLayerProtocol {
+class NetworkManager: NetworkManagerProtocol {
     
-    static let shared = NetworkLayer()
+    static let shared = NetworkManager()
     
     private init() {}
     

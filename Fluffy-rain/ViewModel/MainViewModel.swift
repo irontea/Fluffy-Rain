@@ -8,23 +8,25 @@
 import Foundation
 import RxCocoa
 import RxSwift
+import CoreLocation
 
 protocol MainViewModelProtocol: AnyObject {
     var city: BehaviorRelay<String?> {get set}
     var weatherForNextDays: PublishRelay<[WeatherByDay]> {get set}
     var currentWeather: PublishRelay<WeatherByDay> {get set}
-    
     func fetchWeather()
+    func setupViewModel()
 }
 
 class MainViewModel: MainViewModelProtocol {
     
-    var city = BehaviorRelay<String?>(value: "Moscow")
+    var city = BehaviorRelay<String?>(value: "")
     var weatherForNextDays = PublishRelay<[WeatherByDay]>()
     var currentWeather = PublishRelay<WeatherByDay>()
     
-    func fetchWeather() {
-        NetworkLayer.shared.getWeatherData(for: city.value ?? "Moscow") { [weak self] result in
+    
+    func fetchWeather()  {
+        NetworkManager.shared.getWeatherData(for: city.value ?? "") { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let weatherData):
@@ -36,6 +38,15 @@ class MainViewModel: MainViewModelProtocol {
             }
         }
     }
-        
+    
+    private func firstInFetchWeather() {
+        city.accept(LocationManager.shared.city)
+        fetchWeather()
+    }
+       
+    func setupViewModel() {
+        LocationManager.shared.getCurrentLocation()
+        LocationManager.shared.completion = firstInFetchWeather
+    }
     
 }

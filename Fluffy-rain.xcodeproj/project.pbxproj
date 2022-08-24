@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		54500E6D288ABAB500AD39E9 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54500E6C288ABAB500AD39E9 /* MainViewModel.swift */; };
-		5478B4F32889972600F486C6 /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5478B4F22889972500F486C6 /* NetworkLayer.swift */; };
+		547445DD28B3A3C600010850 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547445DC28B3A3C600010850 /* LocationManager.swift */; };
+		5478B4F32889972600F486C6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5478B4F22889972500F486C6 /* NetworkManager.swift */; };
 		5478B4F52889974000F486C6 /* WeatherStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5478B4F42889974000F486C6 /* WeatherStruct.swift */; };
 		54D5AA61287DFD3D005F2F3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D5AA60287DFD3D005F2F3D /* AppDelegate.swift */; };
 		54D5AA63287DFD3D005F2F3D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D5AA62287DFD3D005F2F3D /* SceneDelegate.swift */; };
@@ -22,7 +23,8 @@
 /* Begin PBXFileReference section */
 		18B279172AA6BCBF04F90EF2 /* Pods-Fluffy-rain.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fluffy-rain.debug.xcconfig"; path = "Target Support Files/Pods-Fluffy-rain/Pods-Fluffy-rain.debug.xcconfig"; sourceTree = "<group>"; };
 		54500E6C288ABAB500AD39E9 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
-		5478B4F22889972500F486C6 /* NetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
+		547445DC28B3A3C600010850 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		5478B4F22889972500F486C6 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5478B4F42889974000F486C6 /* WeatherStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherStruct.swift; sourceTree = "<group>"; };
 		54D5AA5D287DFD3D005F2F3D /* Fluffy-rain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fluffy-rain.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D5AA60287DFD3D005F2F3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,7 +86,8 @@
 		5478B4F72889974E00F486C6 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				5478B4F22889972500F486C6 /* NetworkLayer.swift */,
+				5478B4F22889972500F486C6 /* NetworkManager.swift */,
+				547445DC28B3A3C600010850 /* LocationManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -247,10 +250,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5478B4F32889972600F486C6 /* NetworkLayer.swift in Sources */,
+				5478B4F32889972600F486C6 /* NetworkManager.swift in Sources */,
 				54D5AA65287DFD3D005F2F3D /* MainViewController.swift in Sources */,
 				54D5AA61287DFD3D005F2F3D /* AppDelegate.swift in Sources */,
 				5478B4F52889974000F486C6 /* WeatherStruct.swift in Sources */,
+				547445DD28B3A3C600010850 /* LocationManager.swift in Sources */,
 				54500E6D288ABAB500AD39E9 /* MainViewModel.swift in Sources */,
 				54D5AA63287DFD3D005F2F3D /* SceneDelegate.swift in Sources */,
 			);
@@ -403,6 +407,8 @@
 				DEVELOPMENT_TEAM = Y5526YUP8K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Fluffy-rain/Info.plist";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Please allow location access for use app.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow location access for use app.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -433,6 +439,8 @@
 				DEVELOPMENT_TEAM = Y5526YUP8K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Fluffy-rain/Info.plist";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Please allow location access for use app.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow location access for use app.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

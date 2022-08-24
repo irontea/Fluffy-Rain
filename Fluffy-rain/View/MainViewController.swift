@@ -40,10 +40,16 @@ class MainViewController: UIViewController {
         return tv
     }()
     
+    
+    func das() {
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
         viewmodel = MainViewModel()
+        
+
         
         view.addSubview(textFieldForCity)
         view.addSubview(acceptButton)
@@ -65,8 +71,8 @@ class MainViewController: UIViewController {
             make.bottom.equalTo(view.snp.bottom)
         }
         
+        viewmodel.setupViewModel()
         tableViewForAnotherDays.rx.setDelegate(self).disposed(by: disposeBag)
-        viewmodel.fetchWeather()
         bindTableView()
         bindTextField()
         bindAcceptButton()
@@ -98,6 +104,8 @@ class MainViewController: UIViewController {
             .disposed(by: disposeBag)
             
     }
+    
+    
 }
 
 extension MainViewController: UITableViewDelegate {
