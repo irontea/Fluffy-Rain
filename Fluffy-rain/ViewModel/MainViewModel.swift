@@ -23,7 +23,11 @@ class MainViewModel: MainViewModelProtocol {
     var city = BehaviorRelay<String?>(value: "")
     var weatherForNextDays = PublishRelay<[WeatherByDay]>()
     var currentWeather = PublishRelay<WeatherByDay>()
+    var locationManager: LocationManager
     
+    init(locationManager: LocationManager) {
+        self.locationManager = locationManager
+    }
     
     func fetchWeather()  {
         NetworkManager.shared.getWeatherData(for: city.value ?? "") { [weak self] result in
@@ -40,13 +44,13 @@ class MainViewModel: MainViewModelProtocol {
     }
     
     private func firstInFetchWeather() {
-        city.accept(LocationManager.shared.city)
+        city.accept(locationManager.city)
         fetchWeather()
     }
        
     func setupViewModel() {
-        LocationManager.shared.getCurrentLocation()
-        LocationManager.shared.completion = firstInFetchWeather
+        locationManager.getCurrentLocation()
+        locationManager.completion = firstInFetchWeather
     }
     
 }

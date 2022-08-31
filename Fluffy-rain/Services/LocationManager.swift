@@ -10,12 +10,11 @@ import CoreLocation
 
 class LocationManager:NSObject, CLLocationManagerDelegate {
     
-    static let shared = LocationManager()
     let locationManager = CLLocationManager()
     var city = ""
     var completion: (() -> Void)?
     
-    override init() {}
+
 
     func getCurrentLocation() {
         

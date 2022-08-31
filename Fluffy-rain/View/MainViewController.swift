@@ -16,6 +16,7 @@ class MainViewController: UIViewController {
     
     private var viewmodel: MainViewModelProtocol!
     private let disposeBag = DisposeBag()
+    let locationManager = LocationManager()
     
     private var textFieldForCity: UITextField = {
         let tf = UITextField()
@@ -40,14 +41,11 @@ class MainViewController: UIViewController {
         return tv
     }()
     
-    
-    func das() {
-        
-    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewmodel = MainViewModel()
+        viewmodel = MainViewModel(locationManager: locationManager)
         
 
         
