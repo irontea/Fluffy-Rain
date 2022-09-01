@@ -16,7 +16,7 @@ class MainViewController: UIViewController {
     
     private var viewmodel: MainViewModelProtocol!
     private let disposeBag = DisposeBag()
-    let locationManager = LocationManager()
+    private let locationManager = LocationManager()
     
     private var textFieldForCity: UITextField = {
         let tf = UITextField()
@@ -26,11 +26,19 @@ class MainViewController: UIViewController {
         return tf
     }()
     
+    private var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.register(DaysCollectionViewCell.self, forCellWithReuseIdentifier: DaysCollectionViewCell.identifier)
+        return cv
+    }()
+    
     private var acceptButton: UIButton = {
         let bt = UIButton()
         bt.backgroundColor = .red
         bt.setTitle("Accept", for: .normal)
-//        bt.addTarget(MainViewController.self, action: #selector(accept), for: .touchUpInside)
         return bt
     }()
     
@@ -46,8 +54,6 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         viewmodel = MainViewModel(locationManager: locationManager)
-        
-
         
         view.addSubview(textFieldForCity)
         view.addSubview(acceptButton)
@@ -74,7 +80,6 @@ class MainViewController: UIViewController {
         bindTableView()
         bindTextField()
         bindAcceptButton()
-        // Do any additional setup after loading the view.
     }
     
     private func bindTableView() {
