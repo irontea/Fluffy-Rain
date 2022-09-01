@@ -58,6 +58,7 @@ class MainViewController: UIViewController {
         view.addSubview(textFieldForCity)
         view.addSubview(acceptButton)
         view.addSubview(tableViewForAnotherDays)
+        view.addSubview(collectionView)
         textFieldForCity.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(50)
             make.leading.equalToSuperview()
@@ -68,12 +69,21 @@ class MainViewController: UIViewController {
             make.leading.equalTo(textFieldForCity.snp.trailing)
         }
         
-        tableViewForAnotherDays.snp.makeConstraints { make in
+        collectionView.snp.makeConstraints { make in
             make.top.equalTo(textFieldForCity.snp.bottom)
             make.leading.equalTo(view.snp.leading)
             make.trailing.equalTo(view.snp.trailing)
             make.bottom.equalTo(view.snp.bottom)
         }
+        
+        tableViewForAnotherDays.snp.makeConstraints { make in
+            make.top.equalTo(collectionView.snp.bottom)
+            make.leading.equalTo(view.snp.leading)
+            make.trailing.equalTo(view.snp.trailing)
+            make.bottom.equalTo(view.snp.bottom)
+        }
+        
+        
         
         viewmodel.setupViewModel()
         tableViewForAnotherDays.rx.setDelegate(self).disposed(by: disposeBag)
