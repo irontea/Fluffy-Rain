@@ -13,7 +13,7 @@ class DaysCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .blue
+        contentView.backgroundColor = .red
     }
     
     required init?(coder: NSCoder) {
