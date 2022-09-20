@@ -14,12 +14,14 @@ protocol MainViewModelProtocol: AnyObject {
     var city: BehaviorRelay<String?> {get set}
     var weatherForNextDays: PublishRelay<[WeatherByDay]> {get set}
     var currentWeather: PublishRelay<WeatherByDay> {get set}
+    var uiElemntCount: Int {get}
     func fetchWeather()
     func setupViewModel()
 }
 
 class MainViewModel: MainViewModelProtocol {
     
+    var uiElemntCount: Int = 3
     var city = BehaviorRelay<String?>(value: "")
     var weatherForNextDays = PublishRelay<[WeatherByDay]>()
     var currentWeather = PublishRelay<WeatherByDay>()

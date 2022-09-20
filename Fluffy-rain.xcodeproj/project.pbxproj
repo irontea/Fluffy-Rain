@@ -18,6 +18,9 @@
 		54D5AA68287DFD3D005F2F3D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54D5AA66287DFD3D005F2F3D /* Main.storyboard */; };
 		54D5AA6A287DFD3F005F2F3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54D5AA69287DFD3F005F2F3D /* Assets.xcassets */; };
 		54D5AA6D287DFD3F005F2F3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54D5AA6B287DFD3F005F2F3D /* LaunchScreen.storyboard */; };
+		54EFDA3728D9CCE3003CEEBB /* MainTemperatureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EFDA3628D9CCE3003CEEBB /* MainTemperatureTableViewCell.swift */; };
+		54EFDA3928D9CD0E003CEEBB /* SevenDaysTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EFDA3828D9CD0E003CEEBB /* SevenDaysTableViewCell.swift */; };
+		54EFDA3B28D9CD51003CEEBB /* ExtraMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EFDA3A28D9CD51003CEEBB /* ExtraMainTableViewCell.swift */; };
 		856A4281A54FF784C1FCEDBC /* Pods_Fluffy_rain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DD3415480C8868CEA2E9E7 /* Pods_Fluffy_rain.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +39,9 @@
 		54D5AA69287DFD3F005F2F3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		54D5AA6C287DFD3F005F2F3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		54D5AA6E287DFD3F005F2F3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		54EFDA3628D9CCE3003CEEBB /* MainTemperatureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTemperatureTableViewCell.swift; sourceTree = "<group>"; };
+		54EFDA3828D9CD0E003CEEBB /* SevenDaysTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SevenDaysTableViewCell.swift; sourceTree = "<group>"; };
+		54EFDA3A28D9CD51003CEEBB /* ExtraMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraMainTableViewCell.swift; sourceTree = "<group>"; };
 		B2DD3415480C8868CEA2E9E7 /* Pods_Fluffy_rain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fluffy_rain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B38507318E69861F8653104C /* Pods-Fluffy-rain.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fluffy-rain.release.xcconfig"; path = "Target Support Files/Pods-Fluffy-rain/Pods-Fluffy-rain.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,6 +71,9 @@
 			isa = PBXGroup;
 			children = (
 				54D5AA64287DFD3D005F2F3D /* MainViewController.swift */,
+				54EFDA3628D9CCE3003CEEBB /* MainTemperatureTableViewCell.swift */,
+				54EFDA3A28D9CD51003CEEBB /* ExtraMainTableViewCell.swift */,
+				54EFDA3828D9CD0E003CEEBB /* SevenDaysTableViewCell.swift */,
 				546EBC8B28C0C35500612F3D /* DaysCollectionViewCell.swift */,
 			);
 			path = View;
@@ -254,12 +263,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				5478B4F32889972600F486C6 /* NetworkManager.swift in Sources */,
+				54EFDA3B28D9CD51003CEEBB /* ExtraMainTableViewCell.swift in Sources */,
+				54EFDA3728D9CCE3003CEEBB /* MainTemperatureTableViewCell.swift in Sources */,
 				54D5AA65287DFD3D005F2F3D /* MainViewController.swift in Sources */,
 				54D5AA61287DFD3D005F2F3D /* AppDelegate.swift in Sources */,
 				5478B4F52889974000F486C6 /* WeatherStruct.swift in Sources */,
 				547445DD28B3A3C600010850 /* LocationManager.swift in Sources */,
 				54500E6D288ABAB500AD39E9 /* MainViewModel.swift in Sources */,
 				54D5AA63287DFD3D005F2F3D /* SceneDelegate.swift in Sources */,
+				54EFDA3928D9CD0E003CEEBB /* SevenDaysTableViewCell.swift in Sources */,
 				546EBC8C28C0C35500612F3D /* DaysCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
