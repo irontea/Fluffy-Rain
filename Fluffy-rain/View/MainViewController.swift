@@ -28,6 +28,8 @@ class MainViewController: UIViewController {
         mainTableView.delegate = self
         mainTableView.dataSource = self
         setupUI()
+        viewModel.setupViewModel()
+
     }
     
     func setupUI() {
@@ -62,6 +64,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         case 2:
             let cell = mainTableView.dequeueReusableCell(withIdentifier: ExtraMainTableViewCell.identifier, for: indexPath) as! ExtraMainTableViewCell
+//            cell.configure(model: viewModel.weatherForNextDays)
             return cell
         default:
             return UITableViewCell()
@@ -74,6 +77,14 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     
 }
+//extension MainViewController: UITableViewDelegate {
+//
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
+//
+//
+//}
 
 //    //    private var viewModel: MainViewModelProtocol!
 //

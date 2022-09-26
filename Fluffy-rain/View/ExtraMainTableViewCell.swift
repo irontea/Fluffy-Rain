@@ -6,18 +6,73 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
+import SnapKit
 
 class ExtraMainTableViewCell: UITableViewCell {
-
+    
     static let identifier = "ExtraMainTemperatureCell"
+    
+    private let disposeBag = DisposeBag()
+    
+    private var extraMainTableView: UITableView = {
+        let tv = UITableView()
+        tv.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        return tv
+    }()
+    
+    private func setupUI() {
+       addSubview(extraMainTableView)
+        extraMainTableView.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.top.equalToSuperview()
+        }
+        
+
+    }
+    
+//    func configure(model: PublishRelay<[WeatherByDay]>) {
+//        model.bind(to: extraMainTableView.rx.items(cellIdentifier: "Cell")) {
+//            (count, data, cell) in
+//            cell.textLabel?.text = String(describing: data.temp)
+//        }
+//        .disposed(by: disposeBag)
+//    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .blue
+//        extraMainTableView.rx.setDelegate(self).disposed(by: disposeBag)
+        extraMainTableView.delegate = self
+        extraMainTableView.dataSource = self
+        setupUI()
+
     }
     
     required init?(coder: NSCoder) {
         fatalError()
     }
+    
+}
+
+extension ExtraMainTableViewCell: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = extraMainTableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        cell.textLabel?.text = "BOBA"
+    
+        return cell
+    }
+    
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+            return UITableView.automaticDimension
+        }
+
 
 }

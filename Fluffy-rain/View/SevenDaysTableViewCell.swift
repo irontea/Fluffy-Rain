@@ -32,6 +32,7 @@ class SevenDaysTableViewCell: UITableViewCell {
         setupUI()
         sevenDaysCollectionView.dataSource = self
         sevenDaysCollectionView.delegate = self
+        
     }
     
     required init?(coder: NSCoder) {
@@ -46,6 +47,7 @@ class SevenDaysTableViewCell: UITableViewCell {
             make.bottom.equalToSuperview()
             make.top.equalToSuperview()
         }
+        
     }
     
 }
