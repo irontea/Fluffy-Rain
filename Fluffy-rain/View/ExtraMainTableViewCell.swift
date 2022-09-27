@@ -29,6 +29,7 @@ class ExtraMainTableViewCell: UITableViewCell {
             make.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
             make.top.equalToSuperview()
+            make.height.equalTo(500)
         }
         
 
@@ -59,7 +60,7 @@ class ExtraMainTableViewCell: UITableViewCell {
 
 extension ExtraMainTableViewCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -71,7 +72,7 @@ extension ExtraMainTableViewCell: UITableViewDelegate, UITableViewDataSource {
     
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-            return UITableView.automaticDimension
+        return 400.0
         }
 
 

@@ -46,6 +46,7 @@ class SevenDaysTableViewCell: UITableViewCell {
             make.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
             make.top.equalToSuperview()
+            
         }
         
     }
@@ -63,6 +64,7 @@ extension SevenDaysTableViewCell: UICollectionViewDelegate, UICollectionViewData
             }
             return cell
         }
+    
     
 }
 

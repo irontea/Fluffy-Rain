@@ -43,9 +43,9 @@ class MainViewController: UIViewController {
     }
     
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.mainTableView.tableFooterView = UIView(frame: CGRect.zero)
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        self.mainTableView.tableFooterView = UIView(frame: CGRect.zero)
+//    }
     
 }
 
@@ -72,7 +72,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
   
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-            return UITableView.automaticDimension
+        return 500.0
         }
     
     
