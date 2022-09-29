@@ -11,6 +11,7 @@ import RxSwift
 import CoreLocation
 
 protocol MainViewModelProtocol: AnyObject {
+    
     var city: BehaviorRelay<String?> {get set}
     var sevenDaysViewModelViewModel: SevenDaysViewModelProtocol {get set}
     var todayViewModelViewModel: TodayViewModelProtocol {get set}
@@ -21,7 +22,7 @@ protocol MainViewModelProtocol: AnyObject {
 }
 
 class MainViewModel: MainViewModelProtocol {
-
+    
     var uiElemntCount: Int = 3
     var city = BehaviorRelay<String?>(value: "")
     var sevenDaysViewModelViewModel: SevenDaysViewModelProtocol = SevenDaysViewModel()
@@ -50,7 +51,7 @@ class MainViewModel: MainViewModelProtocol {
         city.accept(locationManager.city)
         fetchWeather()
     }
-       
+    
     func setupViewModel() {
         locationManager.getCurrentLocation()
         locationManager.completion = firstInFetchWeather

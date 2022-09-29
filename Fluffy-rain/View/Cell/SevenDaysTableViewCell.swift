@@ -12,11 +12,8 @@ import RxCocoa
 
 class SevenDaysTableViewCell: UITableViewCell {
     
-    
     static let identifier = "SevenDaysCell"
-    
     let disposeBag = DisposeBag()
-    
     private var sevenDaysCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -27,19 +24,15 @@ class SevenDaysTableViewCell: UITableViewCell {
         return collectionView
     }()
     
-    
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
-
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError()
     }
-
+    
     func setupUI(){
         contentView.addSubview(sevenDaysCollectionView)
         sevenDaysCollectionView.snp.makeConstraints { make in
@@ -47,9 +40,7 @@ class SevenDaysTableViewCell: UITableViewCell {
             make.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
             make.top.equalToSuperview()
-            
         }
-        
     }
     
     func configure(viewModel: SevenDaysViewModel) {
@@ -58,11 +49,9 @@ class SevenDaysTableViewCell: UITableViewCell {
                 cell.maxTemperatureLabel.text = String(describing: element.tempmax ?? 0.0)
                 cell.minTemperatureLabel.text = String(describing: element.tempmin ?? 0.0)
                 cell.averageTemperatureLabel.text = String(describing: element.temp)
-            
-        }
-        .disposed(by: disposeBag)
+            }
+            .disposed(by: disposeBag)
     }
-    
 }
 
 //extension SevenDaysTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -80,7 +69,7 @@ class SevenDaysTableViewCell: UITableViewCell {
 //            cell.maxTemperatureLabel.text = "10"
 //            return cell
 //        }
-    
-    
+
+
 
 

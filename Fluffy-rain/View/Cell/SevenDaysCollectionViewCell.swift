@@ -9,21 +9,19 @@ import UIKit
 import SnapKit
 
 class SevenDaysCollectionViewCell: UICollectionViewCell {
-    static let identifier = "DaysCell"
     
-     var averageTemperatureLabel: UILabel = {
+    static let identifier = "DaysCell"
+    var averageTemperatureLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
-    
-     var maxTemperatureLabel: UILabel = {
+    var maxTemperatureLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 10)
         return label
     }()
-    
-     var minTemperatureLabel: UILabel = {
+    var minTemperatureLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 10)
         return label
@@ -33,7 +31,6 @@ class SevenDaysCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         setupUI()
     }
-    
     required init?(coder: NSCoder) {
         fatalError()
     }
