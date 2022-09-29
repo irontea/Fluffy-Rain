@@ -18,6 +18,7 @@ class MainViewController: UIViewController {
         tableView.register(MainTemperatureTableViewCell.self, forCellReuseIdentifier: MainTemperatureTableViewCell.identifier)
         tableView.register(SevenDaysTableViewCell.self, forCellReuseIdentifier: SevenDaysTableViewCell.identifier)
         tableView.register(ExtraMainTableViewCell.self, forCellReuseIdentifier: ExtraMainTableViewCell.identifier)
+        tableView.separatorStyle = .none
         return tableView
         
     }()
@@ -43,9 +44,9 @@ class MainViewController: UIViewController {
     }
     
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        self.mainTableView.tableFooterView = UIView(frame: CGRect.zero)
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        self.mainTableView.tableFooterView = UIView(frame: CGRect.zero)
+    }
     
 }
 
