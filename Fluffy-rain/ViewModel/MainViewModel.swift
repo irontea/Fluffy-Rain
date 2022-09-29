@@ -12,19 +12,20 @@ import CoreLocation
 
 protocol MainViewModelProtocol: AnyObject {
     var city: BehaviorRelay<String?> {get set}
-    var weatherForNextDays: PublishRelay<[WeatherByDay]> {get set}
-    var currentWeather: PublishRelay<WeatherByDay> {get set}
+    var sevenDaysViewModelViewModel: SevenDaysViewModelProtocol {get set}
+    var todayViewModelViewModel: TodayViewModelProtocol {get set}
     var uiElemntCount: Int {get}
+    
     func fetchWeather()
     func setupViewModel()
 }
 
 class MainViewModel: MainViewModelProtocol {
-    
+
     var uiElemntCount: Int = 3
     var city = BehaviorRelay<String?>(value: "")
-    var weatherForNextDays = PublishRelay<[WeatherByDay]>()
-    var currentWeather = PublishRelay<WeatherByDay>()
+    var sevenDaysViewModelViewModel: SevenDaysViewModelProtocol = SevenDaysViewModel()
+    var todayViewModelViewModel: TodayViewModelProtocol = TodayViewModel()
     var locationManager: LocationManager
     
     init(locationManager: LocationManager) {
@@ -37,8 +38,8 @@ class MainViewModel: MainViewModelProtocol {
             switch result {
             case .success(let weatherData):
                 guard let weatherData = weatherData else {return}
-                self.weatherForNextDays.accept(weatherData.days)
-                self.currentWeather.accept(weatherData.currentConditions)
+                self.sevenDaysViewModelViewModel.weatherForNextDays.accept(weatherData.days)
+                self.todayViewModelViewModel.currentWeather.accept(weatherData.currentConditions)
             case .failure(let error):
                 print(error)
             }

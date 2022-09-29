@@ -58,13 +58,15 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
             let cell = mainTableView.dequeueReusableCell(withIdentifier: MainTemperatureTableViewCell.identifier, for: indexPath) as! MainTemperatureTableViewCell
+            cell.configure(viewModel: viewModel)
             return cell
         case 1:
             let cell = mainTableView.dequeueReusableCell(withIdentifier: SevenDaysTableViewCell.identifier, for: indexPath) as! SevenDaysTableViewCell
+            cell.configure(viewModel: viewModel.sevenDaysViewModelViewModel as! SevenDaysViewModel)
             return cell
         case 2:
             let cell = mainTableView.dequeueReusableCell(withIdentifier: ExtraMainTableViewCell.identifier, for: indexPath) as! ExtraMainTableViewCell
-//            cell.configure(model: viewModel.weatherForNextDays)
+//            cell.configure(model: viewModel.sevenDaysViewModelViewModel)
             return cell
         default:
             return UITableViewCell()

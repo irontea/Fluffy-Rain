@@ -13,7 +13,7 @@ class LocationManager:NSObject, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     var city = ""
     var completion: (() -> Void)?
-    
+    let locale = Locale(identifier: "en_US")
 
 
     func getCurrentLocation() {
@@ -29,7 +29,7 @@ class LocationManager:NSObject, CLLocationManagerDelegate {
         let geodecoder = CLGeocoder()
        
         
-        geodecoder.reverseGeocodeLocation(currentLocation, preferredLocale: .current) { placeMark, error in
+        geodecoder.reverseGeocodeLocation(currentLocation, preferredLocale: locale) { placeMark, error in
             guard let place = placeMark?.first, error == nil else {
                 print("ERROR GEOCODER")
                 return
