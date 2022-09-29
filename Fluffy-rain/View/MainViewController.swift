@@ -20,7 +20,6 @@ class MainViewController: UIViewController {
         tableView.register(ExtraMainTableViewCell.self, forCellReuseIdentifier: ExtraMainTableViewCell.identifier)
         tableView.separatorStyle = .none
         return tableView
-        
     }()
     
     override func viewDidLoad() {
@@ -29,8 +28,8 @@ class MainViewController: UIViewController {
         mainTableView.delegate = self
         mainTableView.dataSource = self
         setupUI()
+        setupNavigationBar()
         viewModel.setupViewModel()
-        
     }
     override func viewWillAppear(_ animated: Bool) {
         self.mainTableView.tableFooterView = UIView(frame: CGRect.zero)
@@ -46,6 +45,21 @@ class MainViewController: UIViewController {
         }
     }
     
+    func setupNavigationBar() {
+        let appearence = UINavigationBarAppearance()
+        let switchTimeButton = UIBarButtonItem(image: UIImage(systemName: "sun.max"), style: .plain, target: self, action: #selector(mockSearch))
+        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(mockSearch))
+        
+        appearence.configureWithDefaultBackground()
+        appearence.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
+        navigationController?.navigationBar.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        navigationItem.scrollEdgeAppearance = appearence
+        navigationItem.standardAppearance = appearence
+        self.navigationItem.leftBarButtonItem = switchTimeButton
+        self.navigationItem.rightBarButtonItem = searchButton
+    }
+    
+    @objc func mockSearch(){}
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
