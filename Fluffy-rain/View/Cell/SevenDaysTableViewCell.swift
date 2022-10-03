@@ -18,6 +18,7 @@ class SevenDaysTableViewCell: UITableViewCell {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        layout.itemSize = CGSize(width: 94, height: 114)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(SevenDaysCollectionViewCell.self, forCellWithReuseIdentifier: SevenDaysCollectionViewCell.identifier)
         collectionView.showsHorizontalScrollIndicator = false
@@ -40,6 +41,8 @@ class SevenDaysTableViewCell: UITableViewCell {
             make.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
             make.top.equalToSuperview()
+            make.height.equalTo(120)
+            
         }
     }
     
@@ -49,6 +52,12 @@ class SevenDaysTableViewCell: UITableViewCell {
                 cell.maxTemperatureLabel.text = String(describing: element.tempmax ?? 0.0)
                 cell.minTemperatureLabel.text = String(describing: element.tempmin ?? 0.0)
                 cell.averageTemperatureLabel.text = String(describing: element.temp)
+                if row == 0 {
+                    cell.dayNameLabel.text = "Today"
+                } else {
+                    cell.dayNameLabel.text = viewModel.dateFormatterFromDate.string(for: viewModel.dateFormatterFromString.date(from:element.datetime))
+                }
+                
             }
             .disposed(by: disposeBag)
     }
