@@ -26,6 +26,7 @@ class SevenDaysViewModel: SevenDaysViewModelProtocol {
     var dateFormatterFromDate: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE"
+        dateFormatter.locale = Locale(identifier: "en_US")
         return dateFormatter
     }()
     
