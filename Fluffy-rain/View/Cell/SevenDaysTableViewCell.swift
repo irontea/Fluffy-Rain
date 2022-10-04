@@ -34,7 +34,7 @@ class SevenDaysTableViewCell: UITableViewCell {
         fatalError()
     }
     
-    func setupUI(){
+    private func setupUI(){
         contentView.addSubview(sevenDaysCollectionView)
         sevenDaysCollectionView.snp.makeConstraints { make in
             make.leading.equalToSuperview()
@@ -42,46 +42,29 @@ class SevenDaysTableViewCell: UITableViewCell {
             make.bottom.equalToSuperview()
             make.top.equalToSuperview()
             make.height.equalTo(120)
-            
         }
     }
     
     func configure(viewModel: SevenDaysViewModel) {
         viewModel.weatherForNextDays
             .bind(to: sevenDaysCollectionView.rx.items(cellIdentifier: SevenDaysCollectionViewCell.identifier, cellType: SevenDaysCollectionViewCell.self)) { (row, element, cell) in
-                cell.maxTemperatureLabel.text = String(describing: element.tempmax ?? 0.0)
-                cell.minTemperatureLabel.text = String(describing: element.tempmin ?? 0.0)
-                cell.averageTemperatureLabel.text = String(describing: element.temp)
+                cell.maxTemperatureLabel.text = String(describing: Int(element.tempmax ?? 0.0)) + "°"
+                cell.minTemperatureLabel.text = String(describing: Int(element.tempmin ?? 0.0)) + "°"
+                cell.averageTemperatureLabel.text = String(describing: Int(element.temp)) + "°"
                 cell.mainWeatherIcon.image = viewModel.getImage(iconName: element.icon)
-                cell.averageTemperatureLabel.text = String(describing: element.temp)
                 cell.sunIcon.image = UIImage(systemName: "sun.max")
                 cell.moonIcon.image = UIImage(systemName: "moon")
-                
                 if row == 0 {
                     cell.dayNameLabel.text = "Today"
                 } else {
                     cell.dayNameLabel.text = viewModel.dateFormatterFromDate.string(for: viewModel.dateFormatterFromString.date(from:element.datetime))
                 }
+                cell.layer.cornerRadius = 10
+                cell.layer.masksToBounds = true
             }
             .disposed(by: disposeBag)
     }
 }
-
-//extension SevenDaysTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//            return 70
-//        }
-//
-//        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SevenDaysCollectionViewCell.identifier, for: indexPath) as? SevenDaysCollectionViewCell else {
-//
-//                return UICollectionViewCell()
-//            }
-//            cell.averageTemperatureLabel.text = "14"
-//            cell.minTemperatureLabel.text = "10"
-//            cell.maxTemperatureLabel.text = "10"
-//            return cell
-//        }
 
 
 
