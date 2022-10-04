@@ -41,6 +41,14 @@ class SevenDaysCollectionViewCell: UICollectionViewCell {
         let icon = UIImageView()
         return icon
     }()
+    let sunIcon: UIImageView = {
+        let icon = UIImageView()
+        return icon
+    }()
+    let moonIcon: UIImageView = {
+        let icon = UIImageView()
+        return icon
+    }()
     
     
     override init(frame: CGRect) {
@@ -58,9 +66,12 @@ class SevenDaysCollectionViewCell: UICollectionViewCell {
         addSubview(mainView)
         mainView.addSubview(dayNameLabel)
         mainView.addSubview(mainWeatherIcon)
-        addSubview(averageTemperatureLabel)
-        addSubview(minTemperatureLabel)
-        addSubview(maxTemperatureLabel)
+        mainView.addSubview(averageTemperatureLabel)
+        mainView.addSubview(minTemperatureLabel)
+        mainView.addSubview(maxTemperatureLabel)
+        mainView.addSubview(sunIcon)
+        mainView.addSubview(moonIcon)
+        
         mainView.snp.makeConstraints { make in
             make.trailing.equalToSuperview()
             make.leading.equalToSuperview()
@@ -78,7 +89,31 @@ class SevenDaysCollectionViewCell: UICollectionViewCell {
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
         }
-        
+        averageTemperatureLabel.snp.makeConstraints { make in
+            make.top.equalTo(mainWeatherIcon.snp.bottom)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+        }
+        minTemperatureLabel.snp.makeConstraints { make in
+            make.top.equalTo(averageTemperatureLabel.snp.bottom)
+            make.leading.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        moonIcon.snp.makeConstraints { make in
+            make.top.equalTo(averageTemperatureLabel.snp.bottom)
+            make.leading.equalTo(minTemperatureLabel.snp.trailing)
+            make.bottom.equalToSuperview()
+        }
+        maxTemperatureLabel.snp.makeConstraints { make in
+            make.top.equalTo(averageTemperatureLabel.snp.bottom)
+            make.leading.equalTo(moonIcon.snp.trailing)
+            make.bottom.equalToSuperview()
+        }
+        sunIcon.snp.makeConstraints { make in
+            make.top.equalTo(averageTemperatureLabel.snp.bottom)
+            make.leading.equalTo(maxTemperatureLabel.snp.trailing)
+            make.bottom.equalToSuperview()
+        }
 //        averageTemperatureLabel.snp.makeConstraints { make in
 //            make.centerX.equalToSuperview()
 //            make.centerY.equalToSuperview()

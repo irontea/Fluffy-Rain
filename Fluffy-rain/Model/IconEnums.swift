@@ -17,5 +17,4 @@ enum IconEnums: String {
     case partlyCloudyNight = "partly-cloudy-night"
     case clearDay = "clear-day"
     case clearNight = "clear-night"
-    
 }
