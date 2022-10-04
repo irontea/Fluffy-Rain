@@ -37,9 +37,9 @@ class SevenDaysCollectionViewCell: UICollectionViewCell {
         label.font = UIFont.systemFont(ofSize: 20)
         return label
     }()
-    let mainWeatherIcon: UIImage = {
-        let icon = UIImage(systemName: "sun.max")
-        return icon ?? UIImage()
+    let mainWeatherIcon: UIImageView = {
+        let icon = UIImageView()
+        return icon
     }()
     
     
@@ -57,7 +57,7 @@ class SevenDaysCollectionViewCell: UICollectionViewCell {
         
         addSubview(mainView)
         mainView.addSubview(dayNameLabel)
-//        addSubview(mainWeatherIcon)
+        mainView.addSubview(mainWeatherIcon)
         addSubview(averageTemperatureLabel)
         addSubview(minTemperatureLabel)
         addSubview(maxTemperatureLabel)
@@ -70,6 +70,13 @@ class SevenDaysCollectionViewCell: UICollectionViewCell {
         dayNameLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(10)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+        }
+        mainWeatherIcon.snp.makeConstraints { make in
+            make.top.equalTo(dayNameLabel.snp.bottom)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
         }
         
 //        averageTemperatureLabel.snp.makeConstraints { make in

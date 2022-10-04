@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		542947B628EB24C3003CC64E /* IconEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542947B528EB24C2003CC64E /* IconEnums.swift */; };
 		54500E6D288ABAB500AD39E9 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54500E6C288ABAB500AD39E9 /* MainViewModel.swift */; };
 		54698E1328E33E9B001FCF6C /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54698E1228E33E9B001FCF6C /* TodayViewModel.swift */; };
 		54698E1528E33EAB001FCF6C /* SevenDaysViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54698E1428E33EAB001FCF6C /* SevenDaysViewModel.swift */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		18B279172AA6BCBF04F90EF2 /* Pods-Fluffy-rain.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fluffy-rain.debug.xcconfig"; path = "Target Support Files/Pods-Fluffy-rain/Pods-Fluffy-rain.debug.xcconfig"; sourceTree = "<group>"; };
+		542947B528EB24C2003CC64E /* IconEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconEnums.swift; sourceTree = "<group>"; };
 		54500E6C288ABAB500AD39E9 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		54698E1228E33E9B001FCF6C /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
 		54698E1428E33EAB001FCF6C /* SevenDaysViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SevenDaysViewModel.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				5478B4F42889974000F486C6 /* WeatherStruct.swift */,
+				542947B528EB24C2003CC64E /* IconEnums.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				54D5AA61287DFD3D005F2F3D /* AppDelegate.swift in Sources */,
 				5478B4F52889974000F486C6 /* WeatherStruct.swift in Sources */,
 				547445DD28B3A3C600010850 /* LocationManager.swift in Sources */,
+				542947B628EB24C3003CC64E /* IconEnums.swift in Sources */,
 				54500E6D288ABAB500AD39E9 /* MainViewModel.swift in Sources */,
 				54698E1328E33E9B001FCF6C /* TodayViewModel.swift in Sources */,
 				54698E1528E33EAB001FCF6C /* SevenDaysViewModel.swift in Sources */,

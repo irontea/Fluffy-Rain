@@ -52,12 +52,14 @@ class SevenDaysTableViewCell: UITableViewCell {
                 cell.maxTemperatureLabel.text = String(describing: element.tempmax ?? 0.0)
                 cell.minTemperatureLabel.text = String(describing: element.tempmin ?? 0.0)
                 cell.averageTemperatureLabel.text = String(describing: element.temp)
+                
                 if row == 0 {
                     cell.dayNameLabel.text = "Today"
                 } else {
                     cell.dayNameLabel.text = viewModel.dateFormatterFromDate.string(for: viewModel.dateFormatterFromString.date(from:element.datetime))
                 }
                 
+                cell.mainWeatherIcon.image = viewModel.getImage(iconName: element.icon)
             }
             .disposed(by: disposeBag)
     }
