@@ -45,7 +45,7 @@ class SevenDaysTableViewCell: UITableViewCell {
         }
     }
     
-    func configure(viewModel: SevenDaysViewModel) {
+    func configure(viewModel: SevenDaysViewModelProtocol) {
         viewModel.weatherForNextDays
             .bind(to: sevenDaysCollectionView.rx.items(cellIdentifier: SevenDaysCollectionViewCell.identifier, cellType: SevenDaysCollectionViewCell.self)) { (row, element, cell) in
                 cell.maxTemperatureLabel.text = String(describing: Int(element.tempmax ?? 0.0)) + "°"

@@ -21,7 +21,6 @@ class MainViewController: UIViewController {
         tableView.register(MainTemperatureTableViewCell.self, forCellReuseIdentifier: MainTemperatureTableViewCell.identifier)
         tableView.register(SevenDaysTableViewCell.self, forCellReuseIdentifier: SevenDaysTableViewCell.identifier)
         tableView.register(ExtraMainTableViewCell.self, forCellReuseIdentifier: ExtraMainTableViewCell.identifier)
-        tableView.separatorStyle = .none
         return tableView
     }()
     private let textFieldForCity: UITextField = {
@@ -42,15 +41,21 @@ class MainViewController: UIViewController {
         let backgroundView = UIView()
         return backgroundView
     }()
-    
+    private let cityLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 37)
+        label.textAlignment = .center
+        return label
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = MainViewModel(locationManager: locationManager)
         mainTableView.delegate = self
         mainTableView.dataSource = self
+        mainTableView.separatorStyle = .none
         setupTableViewUI()
-        setupNavigationBar()
+//        setupNavigationBar()
         setupSearchCityUI()
         setupBinding()
         viewModel.setupViewModel()
@@ -91,6 +96,7 @@ class MainViewController: UIViewController {
         view.addSubview(backgroundView)
         backgroundView.addSubview(textFieldForCity)
         backgroundView.addSubview(acceptButton)
+        view.addSubview(cityLabel)
         
         backgroundView.snp.makeConstraints { make in
             make.top.equalTo(safeArea.snp.top)
@@ -110,7 +116,12 @@ class MainViewController: UIViewController {
             make.trailing.equalTo(backgroundView.snp.trailing)
             make.height.equalTo(25)
             make.width.equalTo(backgroundView.snp.width).multipliedBy(0.25)
-            
+        }
+        
+        cityLabel.snp.makeConstraints { make in
+            make.top.equalTo(backgroundView.snp.bottom)
+            make.centerX.equalToSuperview()
+           
         }
     }
     
@@ -118,6 +129,7 @@ class MainViewController: UIViewController {
         textFieldForCity.rx.text
             .orEmpty
             .bind(to: viewModel.city)
+            
             .disposed(by: disposeBag)
         
         acceptButton.rx.tap
@@ -125,6 +137,14 @@ class MainViewController: UIViewController {
                 guard let self = self else {return}
                 self.viewModel.fetchWeather()
             }
+            .disposed(by: disposeBag)
+        
+        viewModel.city
+            .bind(to: navigationItem.rx.title)
+            .disposed(by: disposeBag)
+        
+        viewModel.city
+            .bind(to: cityLabel.rx.text)
             .disposed(by: disposeBag)
     }
     
@@ -141,11 +161,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
             let cell = mainTableView.dequeueReusableCell(withIdentifier: MainTemperatureTableViewCell.identifier, for: indexPath) as! MainTemperatureTableViewCell
-            cell.configure(viewModel: viewModel)
+            
+            cell.configure(viewModel: viewModel.todayViewModelViewModel)
             return cell
         case 1:
             let cell = mainTableView.dequeueReusableCell(withIdentifier: SevenDaysTableViewCell.identifier, for: indexPath) as! SevenDaysTableViewCell
-            cell.configure(viewModel: viewModel.sevenDaysViewModelViewModel as! SevenDaysViewModel)
+            cell.configure(viewModel: viewModel.sevenDaysViewModelViewModel)
             return cell
         case 2:
             let cell = mainTableView.dequeueReusableCell(withIdentifier: ExtraMainTableViewCell.identifier, for: indexPath) as! ExtraMainTableViewCell
@@ -155,8 +176,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 500.0
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
-    
 }
