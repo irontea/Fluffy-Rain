@@ -23,7 +23,9 @@ class MainTemperatureTableViewCell: UITableViewCell {
     }()
     private let mockView: UIView = {
         let mockView = UIView()
-        mockView.backgroundColor = .clear
+        mockView.backgroundColor = .black
+        mockView.layer.cornerRadius = 50
+        mockView.layer.masksToBounds = true
         return mockView
     }()
     

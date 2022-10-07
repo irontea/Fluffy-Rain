@@ -14,7 +14,6 @@ class MainViewController: UIViewController {
     
     private var viewModel: MainViewModelProtocol!
     private let locationManager = LocationManager()
-//    private let city = ""
     private let disposeBag = DisposeBag()
     private let mainTableView : UITableView = {
         let tableView = UITableView()
@@ -23,132 +22,101 @@ class MainViewController: UIViewController {
         tableView.register(ExtraMainTableViewCell.self, forCellReuseIdentifier: ExtraMainTableViewCell.identifier)
         return tableView
     }()
-    private let textFieldForCity: UITextField = {
-        let tf = UITextField()
-        tf.borderStyle = UITextField.BorderStyle.line
-        tf.textColor = .black
-        tf.font = UIFont.systemFont(ofSize: 28, weight: .bold)
-        tf.backgroundColor = .white
-        return tf
-    }()
-    private let acceptButton: UIButton = {
-        let bt = UIButton()
-        bt.backgroundColor = .red
-        bt.setTitle("Accept", for: .normal)
-        return bt
-    }()
-    private let backgroundView: UIView = {
-        let backgroundView = UIView()
-        return backgroundView
-    }()
+//    private let textFieldForCity: UITextField = {
+//        let tf = UITextField()
+//        tf.borderStyle = UITextField.BorderStyle.line
+//        tf.textColor = .black
+//        tf.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+//        tf.backgroundColor = .white
+//        return tf
+//    }()
+//    private let acceptButton: UIButton = {
+//        let bt = UIButton()
+//        bt.backgroundColor = .red
+//        bt.setTitle("Accept", for: .normal)
+//        return bt
+//    }()
+    
     private let cityLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 37)
         label.textAlignment = .center
         return label
     }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         viewModel = MainViewModel(locationManager: locationManager)
         mainTableView.delegate = self
         mainTableView.dataSource = self
         mainTableView.separatorStyle = .none
-        setupTableViewUI()
-//        setupNavigationBar()
-        setupSearchCityUI()
+        setupUI()
+        setupToolBarUI()
         setupBinding()
         viewModel.setupViewModel()
+
     }
     override func viewWillAppear(_ animated: Bool) {
         self.mainTableView.tableFooterView = UIView(frame: CGRect.zero)
     }
     
-    private func setupTableViewUI() {
+    private func setupUI() {
+        
+        let safeArea = view.layoutMarginsGuide
+        
         view.addSubview(mainTableView)
+        view.addSubview(cityLabel)
+        
+        cityLabel.snp.makeConstraints { make in
+            make.top.equalTo(safeArea.snp.top)
+            make.centerX.equalToSuperview()
+        }
         mainTableView.snp.makeConstraints { make in
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.top.equalToSuperview()
+            make.top.equalTo(cityLabel.snp.bottom)
             make.bottom.equalToSuperview()
         }
     }
     
-   private func setupNavigationBar() {
-        let appearance = UINavigationBarAppearance()
-        let switchTimeButton = UIBarButtonItem(image: UIImage(systemName: "sun.max"), style: .plain, target: self, action: #selector(mockSearch))
-        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(mockSearch))
+    private func setupToolBarUI() {
+        let appearance = UIToolbarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.configureWithTransparentBackground()
+        appearance.backgroundColor = UIColor.clear
+        appearance.backgroundEffect = UIBlurEffect(style: .light)
+        self.navigationController?.toolbar.standardAppearance = appearance
+        self.navigationController?.toolbar.scrollEdgeAppearance = appearance
+        self.navigationController?.toolbar.compactAppearance = appearance
+        self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.isToolbarHidden = false
         
-        appearance.configureWithDefaultBackground()
-        appearance.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
-        appearance.titleTextAttributes = [.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), .font: UIFont.systemFont(ofSize: 18, weight: .semibold)]
-        self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        self.navigationItem.scrollEdgeAppearance = appearance
-        self.navigationItem.standardAppearance = appearance
-        self.navigationItem.leftBarButtonItem = switchTimeButton
-        self.navigationItem.rightBarButtonItem = searchButton
-//        self.navigationItem.title = viewModel.city.value ?? ""
+        var items = [UIBarButtonItem]()
+        items.append( UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil) )
+        items.append( UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil) )
+        self.toolbarItems = items
     }
-    
-    private func setupSearchCityUI(){
-        let safeArea = view.layoutMarginsGuide
-
-        view.addSubview(backgroundView)
-        backgroundView.addSubview(textFieldForCity)
-        backgroundView.addSubview(acceptButton)
-        view.addSubview(cityLabel)
         
-        backgroundView.snp.makeConstraints { make in
-            make.top.equalTo(safeArea.snp.top)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.height.equalTo(30)
-        }
-        textFieldForCity.snp.makeConstraints { make in
-            make.top.equalTo(backgroundView.snp.top)
-            make.leading.equalTo(backgroundView.snp.leading)
-            make.height.equalTo(25)
-            make.width.equalTo(backgroundView.snp.width).multipliedBy(0.75)
-        }
-        acceptButton.snp.makeConstraints{ make in
-            make.top.equalTo(backgroundView.snp.top)
-            make.leading.equalTo(textFieldForCity.snp.trailing)
-            make.trailing.equalTo(backgroundView.snp.trailing)
-            make.height.equalTo(25)
-            make.width.equalTo(backgroundView.snp.width).multipliedBy(0.25)
-        }
-        
-        cityLabel.snp.makeConstraints { make in
-            make.top.equalTo(backgroundView.snp.bottom)
-            make.centerX.equalToSuperview()
-           
-        }
-    }
-    
     private func setupBinding(){
-        textFieldForCity.rx.text
-            .orEmpty
-            .bind(to: viewModel.city)
-            
-            .disposed(by: disposeBag)
-        
-        acceptButton.rx.tap
-            .bind {[weak self] in
-                guard let self = self else {return}
-                self.viewModel.fetchWeather()
-            }
-            .disposed(by: disposeBag)
-        
-        viewModel.city
-            .bind(to: navigationItem.rx.title)
-            .disposed(by: disposeBag)
+//        textFieldForCity.rx.text
+//            .orEmpty
+//            .bind(to: viewModel.city)
+//            .disposed(by: disposeBag)
+//
+//        acceptButton.rx.tap
+//            .bind {[weak self] in
+//                guard let self = self else {return}
+//                self.viewModel.fetchWeather()
+//            }
+//            .disposed(by: disposeBag)
         
         viewModel.city
             .bind(to: cityLabel.rx.text)
             .disposed(by: disposeBag)
     }
     
-    @objc func mockSearch(){}
     
 }
 
