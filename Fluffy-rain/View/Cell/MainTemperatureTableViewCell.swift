@@ -40,8 +40,8 @@ class MainTemperatureTableViewCell: UITableViewCell {
     
     private func setupUI() {
         
-        addSubview(mockView)
-        addSubview(weatherDescription)
+        contentView.addSubview(mockView)
+        contentView.addSubview(weatherDescription)
         
         mockView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(18)
@@ -50,7 +50,7 @@ class MainTemperatureTableViewCell: UITableViewCell {
             make.width.equalTo(300)
         }
         weatherDescription.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(5)
+            make.leading.equalToSuperview().offset(10)
             make.top.equalTo(mockView.snp.bottom).offset(37)
             make.bottom.equalToSuperview().offset(-22)
         }

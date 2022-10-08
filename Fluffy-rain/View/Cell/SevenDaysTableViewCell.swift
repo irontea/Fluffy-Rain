@@ -17,7 +17,7 @@ class SevenDaysTableViewCell: UITableViewCell {
     private var sevenDaysCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         layout.itemSize = CGSize(width: 94, height: 114)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(SevenDaysCollectionViewCell.self, forCellWithReuseIdentifier: SevenDaysCollectionViewCell.identifier)
@@ -41,7 +41,7 @@ class SevenDaysTableViewCell: UITableViewCell {
             make.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
             make.top.equalToSuperview()
-            make.height.equalTo(120)
+            make.height.equalTo(114)
         }
     }
     

@@ -52,6 +52,7 @@ class MainViewController: UIViewController {
         mainTableView.delegate = self
         mainTableView.dataSource = self
         mainTableView.separatorStyle = .none
+//        mainTableView.isUserInteractionEnabled = false
         setupUI()
         setupToolBarUI()
         setupBinding()
@@ -146,5 +147,14 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            tableView.beginUpdates()
+            tableView.endUpdates()
+//        }
+        
     }
 }
