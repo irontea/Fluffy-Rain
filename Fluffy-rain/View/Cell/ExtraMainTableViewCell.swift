@@ -31,7 +31,7 @@ class ExtraMainTableViewCell: UITableViewCell {
     private let pressureValueLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 30)
-        label.text = "10"
+        label.text = " "
         label.textAlignment = .center
         return label
     }()
@@ -45,7 +45,7 @@ class ExtraMainTableViewCell: UITableViewCell {
     private let windValueLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 30)
-        label.text = "10"
+        label.text = " "
         label.textAlignment = .center
         return label
     }()
@@ -59,7 +59,7 @@ class ExtraMainTableViewCell: UITableViewCell {
     private let sunriseValueLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 30)
-        label.text = "10"
+        label.text = " "
         label.textAlignment = .center
         return label
     }()
@@ -73,7 +73,7 @@ class ExtraMainTableViewCell: UITableViewCell {
     private let sunsetValueLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 30)
-        label.text = "10"
+        label.text = " "
         label.textAlignment = .center
         return label
     }()
@@ -104,7 +104,7 @@ class ExtraMainTableViewCell: UITableViewCell {
             make.leading.equalToSuperview().offset(10)
             make.trailing.equalToSuperview().offset(-10)
             make.bottom.equalToSuperview()
-            make.height.equalTo(300)
+            make.height.equalTo(220)
         }
         
         sunriseLabel.snp.makeConstraints { make in
@@ -144,10 +144,16 @@ class ExtraMainTableViewCell: UITableViewCell {
         }
     }
     
-        
-
     func configure(viewModel: TodayViewModelProtocol) {
-        
+        viewModel.currentWeather.subscribe { [weak self] weatherData in
+            guard let self = self else {return}
+            guard let weatherData = weatherData.event.element else {return}
+            self.sunsetValueLabel.text = weatherData.sunset
+            self.sunriseValueLabel.text = weatherData.sunrise
+            self.windValueLabel.text = String(describing: weatherData.windspeed)
+            self.pressureValueLabel.text = String(describing: weatherData.pressure )
+        }
+        .disposed(by: disposeBag)
     }
     
 }

@@ -25,6 +25,8 @@ struct WeatherByDay: Codable {
     let conditions: String
     let description: String?
     let visibility: Double
+    let pressure: Double
+    let windspeed: Double
 }
 
 /*

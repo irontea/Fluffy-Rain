@@ -139,6 +139,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         case 2:
             let cell = mainTableView.dequeueReusableCell(withIdentifier: ExtraMainTableViewCell.identifier, for: indexPath) as! ExtraMainTableViewCell
+            cell.configure(viewModel: viewModel.todayViewModelViewModel)
             return cell
         default:
             return UITableViewCell()
@@ -150,11 +151,4 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            tableView.beginUpdates()
-            tableView.endUpdates()
-//        }
-        
-    }
 }
