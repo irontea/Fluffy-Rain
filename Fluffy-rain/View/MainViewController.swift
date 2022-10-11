@@ -23,20 +23,27 @@ class MainViewController: UIViewController {
         return tableView
     }()
     private let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
-        private let textFieldForCity: UITextField = {
-            let tf = UITextField()
-            tf.borderStyle = UITextField.BorderStyle.line
-            tf.textColor = .black
-            tf.font = UIFont.systemFont(ofSize: 28, weight: .bold)
-            tf.backgroundColor = .white
-            return tf
-        }()
-        private let acceptButton: UIButton = {
-            let bt = UIButton()
-            bt.backgroundColor = .red
-            bt.setTitle("Accept", for: .normal)
-            return bt
-        }()
+    private let searchView: UIView = {
+        let searchView = UIView()
+        searchView.backgroundColor = .yellow
+        searchView.layer.cornerRadius = 10
+        searchView.layer.masksToBounds = true
+        return searchView
+    }()
+    private let textFieldForCity: UITextField = {
+        let tf = UITextField()
+        tf.borderStyle = UITextField.BorderStyle.line
+        tf.textColor = .black
+        tf.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        tf.backgroundColor = .white
+        return tf
+    }()
+    private let acceptButton: UIButton = {
+        let bt = UIButton()
+        bt.backgroundColor = .red
+        bt.setTitle("Accept", for: .normal)
+        return bt
+    }()
     
     private let cityLabel: UILabel = {
         let label = UILabel()
@@ -53,7 +60,6 @@ class MainViewController: UIViewController {
         mainTableView.delegate = self
         mainTableView.dataSource = self
         mainTableView.separatorStyle = .none
-        //        mainTableView.isUserInteractionEnabled = false
         setupUI()
         setupToolBarUI()
         setupBinding()
@@ -70,8 +76,9 @@ class MainViewController: UIViewController {
         
         view.addSubview(mainTableView)
         view.addSubview(cityLabel)
-        view.addSubview(textFieldForCity)
-        view.addSubview(acceptButton)
+        view.addSubview(searchView)
+        searchView.addSubview(textFieldForCity)
+        searchView.addSubview(acceptButton)
         
         cityLabel.snp.makeConstraints { make in
             make.top.equalTo(safeArea.snp.top)
@@ -83,14 +90,23 @@ class MainViewController: UIViewController {
             make.top.equalTo(cityLabel.snp.bottom)
             make.bottom.equalToSuperview()
         }
-        textFieldForCity.snp.makeConstraints { make in
+        searchView.snp.makeConstraints { make in
             make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
             make.bottom.equalTo(safeArea.snp.bottom)
+            make.height.equalTo(50)
+        }
+        textFieldForCity.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().offset(5)
+            make.width.equalToSuperview().multipliedBy(0.75)
         }
         acceptButton.snp.makeConstraints { make in
             make.leading.equalTo(textFieldForCity.snp.trailing)
-            make.bottom.equalTo(safeArea.snp.bottom)
-            make.trailing.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.height.equalTo(textFieldForCity.snp.height)
+            make.trailing.equalToSuperview().offset(-5)
+            make.width.equalToSuperview().multipliedBy(0.25)
         }
     }
     
@@ -113,17 +129,17 @@ class MainViewController: UIViewController {
     }
     
     private func setupBinding(){
-                textFieldForCity.rx.text
-                    .orEmpty
-                    .bind(to: viewModel.city)
-                    .disposed(by: disposeBag)
+        textFieldForCity.rx.text
+            .orEmpty
+            .bind(to: viewModel.city)
+            .disposed(by: disposeBag)
         
-                acceptButton.rx.tap
-                    .bind {[weak self] in
-                        guard let self = self else {return}
-                        self.viewModel.fetchWeather()
-                    }
-                    .disposed(by: disposeBag)
+        acceptButton.rx.tap
+            .bind {[weak self] in
+                guard let self = self else {return}
+                self.viewModel.fetchWeather()
+            }
+            .disposed(by: disposeBag)
         
         add.rx.tap
             .bind {[weak self] in
@@ -134,17 +150,14 @@ class MainViewController: UIViewController {
         
         viewModel.showSearch
             .asObservable()
-            .subscribe { show in
+            .subscribe { [weak self] show in
+                guard let self = self else {return}
                 if show.element! {
-                    self.textFieldForCity.isHidden = false
-                    self.acceptButton.isHidden = false
-                    self.acceptButton.alpha = 1
-                    self.textFieldForCity.alpha = 1
+                    self.searchView.isHidden = false
+                    self.searchView.alpha = 1
                 } else {
-                    self.textFieldForCity.isHidden = true
-                    self.acceptButton.isHidden = true
-                    self.acceptButton.alpha = 0
-                    self.textFieldForCity.alpha = 0
+                    self.searchView.isHidden = true
+                    self.searchView.alpha = 0
                 }
             }
             .disposed(by: disposeBag)
