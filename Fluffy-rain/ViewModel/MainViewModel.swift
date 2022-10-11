@@ -19,6 +19,7 @@ protocol MainViewModelProtocol: AnyObject {
     
     func fetchWeather()
     func setupViewModel()
+    func showSearchView()
 }
 
 class MainViewModel: MainViewModelProtocol {
@@ -55,6 +56,10 @@ class MainViewModel: MainViewModelProtocol {
     func setupViewModel() {
         locationManager.getCurrentLocation()
         locationManager.completion = firstInFetchWeather
+    }
+    
+    func showSearchView(){
+        
     }
     
 }

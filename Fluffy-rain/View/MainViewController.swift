@@ -22,20 +22,21 @@ class MainViewController: UIViewController {
         tableView.register(ExtraMainTableViewCell.self, forCellReuseIdentifier: ExtraMainTableViewCell.identifier)
         return tableView
     }()
-//    private let textFieldForCity: UITextField = {
-//        let tf = UITextField()
-//        tf.borderStyle = UITextField.BorderStyle.line
-//        tf.textColor = .black
-//        tf.font = UIFont.systemFont(ofSize: 28, weight: .bold)
-//        tf.backgroundColor = .white
-//        return tf
-//    }()
-//    private let acceptButton: UIButton = {
-//        let bt = UIButton()
-//        bt.backgroundColor = .red
-//        bt.setTitle("Accept", for: .normal)
-//        return bt
-//    }()
+    private let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
+    //    private let textFieldForCity: UITextField = {
+    //        let tf = UITextField()
+    //        tf.borderStyle = UITextField.BorderStyle.line
+    //        tf.textColor = .black
+    //        tf.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+    //        tf.backgroundColor = .white
+    //        return tf
+    //    }()
+    //    private let acceptButton: UIButton = {
+    //        let bt = UIButton()
+    //        bt.backgroundColor = .red
+    //        bt.setTitle("Accept", for: .normal)
+    //        return bt
+    //    }()
     
     private let cityLabel: UILabel = {
         let label = UILabel()
@@ -43,7 +44,7 @@ class MainViewController: UIViewController {
         label.textAlignment = .center
         return label
     }()
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,12 +53,12 @@ class MainViewController: UIViewController {
         mainTableView.delegate = self
         mainTableView.dataSource = self
         mainTableView.separatorStyle = .none
-//        mainTableView.isUserInteractionEnabled = false
+        //        mainTableView.isUserInteractionEnabled = false
         setupUI()
         setupToolBarUI()
         setupBinding()
         viewModel.setupViewModel()
-
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         self.mainTableView.tableFooterView = UIView(frame: CGRect.zero)
@@ -96,22 +97,30 @@ class MainViewController: UIViewController {
         
         var items = [UIBarButtonItem]()
         items.append( UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil) )
-        items.append( UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil) )
+        items.append(add)
         self.toolbarItems = items
     }
-        
+    
     private func setupBinding(){
-//        textFieldForCity.rx.text
-//            .orEmpty
-//            .bind(to: viewModel.city)
-//            .disposed(by: disposeBag)
-//
-//        acceptButton.rx.tap
-//            .bind {[weak self] in
-//                guard let self = self else {return}
-//                self.viewModel.fetchWeather()
-//            }
-//            .disposed(by: disposeBag)
+        //        textFieldForCity.rx.text
+        //            .orEmpty
+        //            .bind(to: viewModel.city)
+        //            .disposed(by: disposeBag)
+        //
+        //        acceptButton.rx.tap
+        //            .bind {[weak self] in
+        //                guard let self = self else {return}
+        //                self.viewModel.fetchWeather()
+        //            }
+        //            .disposed(by: disposeBag)
+        
+        add.rx.tap
+            .bind {[weak self] in
+                guard let self = self else {return}
+                self.viewModel.showSearchView()
+            }
+            .disposed(by: disposeBag)
+        
         
         viewModel.city
             .bind(to: cityLabel.rx.text)
