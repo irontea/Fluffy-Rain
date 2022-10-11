@@ -23,20 +23,20 @@ class MainViewController: UIViewController {
         return tableView
     }()
     private let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
-    //    private let textFieldForCity: UITextField = {
-    //        let tf = UITextField()
-    //        tf.borderStyle = UITextField.BorderStyle.line
-    //        tf.textColor = .black
-    //        tf.font = UIFont.systemFont(ofSize: 28, weight: .bold)
-    //        tf.backgroundColor = .white
-    //        return tf
-    //    }()
-    //    private let acceptButton: UIButton = {
-    //        let bt = UIButton()
-    //        bt.backgroundColor = .red
-    //        bt.setTitle("Accept", for: .normal)
-    //        return bt
-    //    }()
+        private let textFieldForCity: UITextField = {
+            let tf = UITextField()
+            tf.borderStyle = UITextField.BorderStyle.line
+            tf.textColor = .black
+            tf.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+            tf.backgroundColor = .white
+            return tf
+        }()
+        private let acceptButton: UIButton = {
+            let bt = UIButton()
+            bt.backgroundColor = .red
+            bt.setTitle("Accept", for: .normal)
+            return bt
+        }()
     
     private let cityLabel: UILabel = {
         let label = UILabel()
@@ -70,6 +70,8 @@ class MainViewController: UIViewController {
         
         view.addSubview(mainTableView)
         view.addSubview(cityLabel)
+        view.addSubview(textFieldForCity)
+        view.addSubview(acceptButton)
         
         cityLabel.snp.makeConstraints { make in
             make.top.equalTo(safeArea.snp.top)
@@ -80,6 +82,15 @@ class MainViewController: UIViewController {
             make.trailing.equalToSuperview()
             make.top.equalTo(cityLabel.snp.bottom)
             make.bottom.equalToSuperview()
+        }
+        textFieldForCity.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.bottom.equalTo(safeArea.snp.bottom)
+        }
+        acceptButton.snp.makeConstraints { make in
+            make.leading.equalTo(textFieldForCity.snp.trailing)
+            make.bottom.equalTo(safeArea.snp.bottom)
+            make.trailing.equalToSuperview()
         }
     }
     
@@ -102,22 +113,25 @@ class MainViewController: UIViewController {
     }
     
     private func setupBinding(){
-        //        textFieldForCity.rx.text
-        //            .orEmpty
-        //            .bind(to: viewModel.city)
-        //            .disposed(by: disposeBag)
-        //
-        //        acceptButton.rx.tap
-        //            .bind {[weak self] in
-        //                guard let self = self else {return}
-        //                self.viewModel.fetchWeather()
-        //            }
-        //            .disposed(by: disposeBag)
+                textFieldForCity.rx.text
+                    .orEmpty
+                    .bind(to: viewModel.city)
+                    .disposed(by: disposeBag)
+        
+                acceptButton.rx.tap
+                    .bind {[weak self] in
+                        guard let self = self else {return}
+                        self.viewModel.fetchWeather()
+                    }
+                    .disposed(by: disposeBag)
         
         add.rx.tap
             .bind {[weak self] in
                 guard let self = self else {return}
-                self.viewModel.showSearchView()
+                self.textFieldForCity.isHidden = !self.textFieldForCity.isHidden
+                self.acceptButton.isHidden = !self.acceptButton.isHidden
+                self.acceptButton.alpha = self.acceptButton.alpha == 0 ? 1 : 0
+                self.textFieldForCity.alpha = self.textFieldForCity.alpha == 0 ? 1 : 0
             }
             .disposed(by: disposeBag)
         
