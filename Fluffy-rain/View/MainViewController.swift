@@ -128,13 +128,26 @@ class MainViewController: UIViewController {
         add.rx.tap
             .bind {[weak self] in
                 guard let self = self else {return}
-                self.textFieldForCity.isHidden = !self.textFieldForCity.isHidden
-                self.acceptButton.isHidden = !self.acceptButton.isHidden
-                self.acceptButton.alpha = self.acceptButton.alpha == 0 ? 1 : 0
-                self.textFieldForCity.alpha = self.textFieldForCity.alpha == 0 ? 1 : 0
+                self.viewModel.showSearch.accept(!self.viewModel.showSearch.value)
             }
             .disposed(by: disposeBag)
         
+        viewModel.showSearch
+            .asObservable()
+            .subscribe { show in
+                if show.element! {
+                    self.textFieldForCity.isHidden = false
+                    self.acceptButton.isHidden = false
+                    self.acceptButton.alpha = 1
+                    self.textFieldForCity.alpha = 1
+                } else {
+                    self.textFieldForCity.isHidden = true
+                    self.acceptButton.isHidden = true
+                    self.acceptButton.alpha = 0
+                    self.textFieldForCity.alpha = 0
+                }
+            }
+            .disposed(by: disposeBag)
         
         viewModel.city
             .bind(to: cityLabel.rx.text)

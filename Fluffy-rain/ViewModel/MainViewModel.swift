@@ -16,6 +16,7 @@ protocol MainViewModelProtocol: AnyObject {
     var sevenDaysViewModelViewModel: SevenDaysViewModelProtocol {get set}
     var todayViewModelViewModel: TodayViewModelProtocol {get set}
     var uiElemntCount: Int {get}
+    var showSearch: BehaviorRelay<Bool> {get set}
     
     func fetchWeather()
     func setupViewModel()
@@ -29,6 +30,7 @@ class MainViewModel: MainViewModelProtocol {
     var sevenDaysViewModelViewModel: SevenDaysViewModelProtocol = SevenDaysViewModel()
     var todayViewModelViewModel: TodayViewModelProtocol = TodayViewModel()
     var locationManager: LocationManager
+    var showSearch = BehaviorRelay<Bool>(value: false)
     
     init(locationManager: LocationManager) {
         self.locationManager = locationManager
